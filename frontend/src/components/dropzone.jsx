@@ -1,20 +1,23 @@
 import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
+import { Button } from "react-bootstrap";
  
-function MyDropzone() {
+const Dropzone = () => {
   const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
+		debugger
   }, [])
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+	
+		let color = isDragActive ? "success" : "warning"
  
   return (
-    <div {...getRootProps()}>
+    <Button variant={color} {...getRootProps()}>
       <input {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
-      }
-    </div>
+			Upload Workout Data Here
+     
+    </Button>
   )
 }
+
+export default Dropzone
+
