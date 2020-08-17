@@ -13,7 +13,7 @@ export default function NavBar() {
   );
 
   const resetDataButton = (updateFile) => (
-    <Button variant="secondary" onClick={() => updateFile(null)}>
+    <Button variant="danger" onClick={() => updateFile(null)}>
       Upload New File
     </Button>
   );

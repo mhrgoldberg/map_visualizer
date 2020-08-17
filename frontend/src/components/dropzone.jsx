@@ -14,8 +14,8 @@ export default function DropzoneComponent() {
           {({ getRootProps, getInputProps, isDragActive }) => (
             <div
               style={{
-                border: `5px dashed ${isDragActive ? "green" : "white"}`,
-                color: `${isDragActive ? "green" : "white"}`,
+                border: `5px dashed ${isDragActive ? "#09f7a0" : "#f8f9fa"}`,
+                color: `${isDragActive ? "#09f7a0" : "#f8f9fa"}`,
               }}
               {...getRootProps()}
               id="upload-button"

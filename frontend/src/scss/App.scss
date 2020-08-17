@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: #232834;
   width: 100vw;
   height: 100vh;
 }
@@ -12,9 +11,9 @@
 }
 
 #upload-button {
-  width: 100%;
-  height: calc(100% - 56px);
-  border-radius: 5rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 56px - 2rem);
+  border-radius: 3rem;
   color: white;
   // text-align: center;
   font-size: 3rem;
@@ -22,11 +21,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1rem;
   cursor: pointer;
+  min-width: 400px;
+  min-height: 300px;
 }
 
 .upload-header {
   padding: 30px;
+  max-width: 800px;
 }
 
 
