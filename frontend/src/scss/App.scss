@@ -5,6 +5,30 @@
   height: 100vh;
 }
 
+.navbar-span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#upload-button {
+  width: 100%;
+  height: calc(100% - 56px);
+  border-radius: 5rem;
+  color: white;
+  // text-align: center;
+  font-size: 3rem;
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.upload-header {
+  padding: 30px;
+}
+
 
 
 @import "custom"

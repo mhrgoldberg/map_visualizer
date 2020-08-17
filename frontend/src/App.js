@@ -1,14 +1,16 @@
-import React from 'react';
-import NavBar from './components/navbar'
+import React from "react";
+import NavBar from "./components/navbar";
+import ComponentSwitcher from "./components/component_switcher";
+import { FileProvider } from "./file_context";
+import "./scss/App.scss";
 
-import './scss/App.scss';
-
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <NavBar />
+      <FileProvider>
+        <NavBar />
+        <ComponentSwitcher />
+      </FileProvider>
     </div>
   );
 }
-
-export default App;
