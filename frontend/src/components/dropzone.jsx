@@ -8,13 +8,25 @@ export default function DropzoneComponent() {
       {({ updateFile }) => (
         <Dropzone
           onDrop={(newFile) => {
+            let reader = new FileReader();
+            reader.readAsText(newFile[0]);
+
+            reader.onload = function () {
+              console.log(reader.result);
+              updateFile(reader.result);
+            };
+
+            reader.onerror = function () {
+              console.log(reader.error);
+            };
+
             updateFile(newFile);
           }}
         >
           {({ getRootProps, getInputProps, isDragActive }) => (
             <div
               style={{
-                border: `5px dashed ${isDragActive ? "#09f7a0" : "#f8f9fa"}`,
+                borderColor: `${isDragActive ? "#09f7a0" : "#f8f9fa"}`,
                 color: `${isDragActive ? "#09f7a0" : "#f8f9fa"}`,
               }}
               {...getRootProps()}
@@ -23,7 +35,7 @@ export default function DropzoneComponent() {
               <input {...getInputProps()} />
               <h1 className="upload-header">
                 Upload GPX data by clicking to browse your files or drag and
-                drop here!
+                drop directly here!
               </h1>
             </div>
           )}

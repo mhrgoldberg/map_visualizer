@@ -6,8 +6,8 @@ import DropzoneComponent from "./dropzone";
 export default function ComponentSwitcher() {
   return (
     <FileConsumer>
-      {({ file }) => {
-        return file ? <Dashboard /> : <DropzoneComponent />;
+      {({ file }) => { 
+        return file ? <Dashboard file={file} /> : <DropzoneComponent />;
       }}
     </FileConsumer>
   );

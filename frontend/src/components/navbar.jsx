@@ -8,7 +8,7 @@ export default function NavBar() {
   const noDataButtons = (
     <ButtonGroup>
       <Button variant="secondary">Download Sample Data</Button>
-      <Button variant="secondary">Sample Dashboard</Button>
+      <Button variant="secondary">View Sample Dashboard</Button>
     </ButtonGroup>
   );
 

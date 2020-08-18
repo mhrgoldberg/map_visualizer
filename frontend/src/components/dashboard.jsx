@@ -1,9 +1,14 @@
 import React from "react";
 
-export default function Dashboard() {
+export default function Dashboard({file}) {
+  const parseData = () => {
+    // debugger
+
+  }
+
   return (
     <React.Fragment>
-      <div>Im a dashboard</div>
+      {parseData()}
     </React.Fragment>
   );
 }
