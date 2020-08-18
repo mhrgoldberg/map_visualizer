@@ -22,7 +22,7 @@ export default function NavBar() {
     <FileConsumer>
       {({ file, updateFile }) => (
         <Navbar bg="primary" variant="dark">
-          <span class="navbar-span">
+          <span className="navbar-span">
             <Navbar.Brand>Map Visualizer</Navbar.Brand>
             {file ? resetDataButton(updateFile) : noDataButtons}
           </span>
