@@ -16,6 +16,7 @@ export default function DataSanatizer() {
       if (reader.result.includes("gpx")) {
         const parsedData = await parseData(reader.result);
         const sanitizedData = sanitizeData(parsedData);
+        console.log(sanitizedData)
         dispatch({ type: "updateFile", payload: sanitizedData });
       } else {
         alert("Sorry, we can only accept GPX files");

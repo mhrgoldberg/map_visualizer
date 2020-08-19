@@ -13,7 +13,6 @@ function Map({ onMount, className, onMountProps }) {
     zoom: 15,
 	});
 
-	console.log(state)
 
   const addPolyline = () => {
 			const latLngPath = state.file.trackPoints.latLngs
@@ -21,7 +20,7 @@ function Map({ onMount, className, onMountProps }) {
         path: latLngPath,
         geodesic: true,
         strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
+        strokeOpacity: 1.5,
         strokeWeight: 2,
 			});
 			const bounds = new window.google.maps.LatLngBounds();
