@@ -1,23 +1,28 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useReducer } from "react";
 
-export const FileContext = createContext({
-  file: null,
-  updateFile: () => {},
-});
+export const FileContext = createContext();
 
 export function FileProvider(props) {
-  const updateFile = (newFile) => {
-    setfileState({ file: newFile });
+  const initialState = {
+    file: null
   };
-  const [fileState, setfileState] = useState({
-    file: null,
-    updateFile: updateFile,
-  })
 
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "reset":
+        return initialState;
+      case "updateFile":
+        return { file: action.payload };
+      default:
+        throw new Error();
+    }
+  };
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const value = { state, dispatch };
 
-    return (
-      <FileContext.Provider value={fileState}>
-        {props.children}
-      </FileContext.Provider>
-    );
+  return (
+    <FileContext.Provider value={value}>
+      {props.children}
+    </FileContext.Provider>
+  );
 }

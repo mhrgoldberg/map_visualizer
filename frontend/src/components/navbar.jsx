@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { FileContext } from "../file_context";
 
 export default function NavBar() {
+  const {state, dispatch} = useContext(FileContext);
+
   const noDataButtons = (
     <ButtonGroup>
       <Button variant="secondary">Download Sample Data</Button>
@@ -12,22 +14,23 @@ export default function NavBar() {
     </ButtonGroup>
   );
 
-  const resetDataButton = (updateFile) => (
-    <Button variant="danger" onClick={() => updateFile(null)}>
+  const resetDataButton = (
+    <Button
+      variant="danger"
+      onClick={() => {
+        dispatch({ type: "reset" });
+      }}
+    >
       Upload New File
     </Button>
   );
 
   return (
-    <FileContext.Consumer>
-      {({ file, updateFile }) => (
         <Navbar bg="primary" variant="dark">
           <span className="navbar-span">
             <Navbar.Brand>Map Visualizer</Navbar.Brand>
-            {file ? resetDataButton(updateFile) : noDataButtons}
+            {state.file ? resetDataButton : noDataButtons}
           </span>
         </Navbar>
-      )}
-    </FileContext.Consumer>
   );
 }

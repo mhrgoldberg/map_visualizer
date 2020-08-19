@@ -6,8 +6,8 @@ import DataSanatizer from "./data_upload/data_sanitizer";
 export default function ComponentSwitcher() {
   return (
     <FileContext.Consumer>
-      {({ file }) => { 
-        return file ? <Dashboard /> : <DataSanatizer />;
+      {({ state }) => { 
+        return state.file ? <Dashboard /> : <DataSanatizer />;
       }}
     </FileContext.Consumer>
   );

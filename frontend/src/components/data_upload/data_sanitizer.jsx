@@ -1,8 +1,28 @@
-import React from "react";
+import React, {useContext} from "react";
 import DropzoneFileReader from "./dropzone_file_reader";
-
+import { SportsLib } from "@sports-alliance/sports-lib";
+import { FileContext } from "../../file_context.js";
 
 export default function DataSanatizer() {
+  const { dispatch } = useContext(FileContext);
+  const readAndUpdateFile = (fileObject) => {
+    const reader = new FileReader();
+    reader.readAsText(fileObject);
+    reader.onload = async () => {
+      const parsedData = await parseData(reader.result);
+      const sanitizedData = sanitizeData(parsedData);
+      dispatch({type: "updateFile", payload: sanitizedData});
+    };
+    reader.onerror = () => {
+      console.log(reader.error);
+    };
+  };
+
+  const parseData = (dataString) => {
+    return SportsLib.importFromGPX(dataString).then((event) => {
+      return event.getActivities()[0];
+    });
+  };
 
   const sanitizeData = (parsedData) => {
     const tracks = parsedData.getAllStreams()
@@ -30,5 +50,5 @@ export default function DataSanatizer() {
     };
   };
 
-  return <DropzoneFileReader sanitizeData={sanitizeData} />;
+  return <DropzoneFileReader readAndUpdateFile={readAndUpdateFile} />;
 }
