@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import DropZoneComponent from "./dropzone_file_reader";
+import DropZoneComponent from "./dropzone";
 import { SportsLib } from "@sports-alliance/sports-lib";
 import { FileContext } from "../../file_context.js";
-import DropzoneComponent from "./dropzone_file_reader";
+import DropzoneComponent from "./dropzone";
 
 export default function DataSanatizer() {
   const { dispatch } = useContext(FileContext);
@@ -29,6 +29,18 @@ export default function DataSanatizer() {
     });
   };
 
+  const combineLatLngs = (latTrack, lngTrack) => {
+    const latLngs = [];
+    for (let i = 0; i < latTrack.length; i++) {
+      const lat = latTrack[i];
+      const lng = lngTrack[i];
+      if (lat !== null && lng != null) {
+        latLngs.push({ lat, lng });
+      }
+    }
+    return latLngs;
+  };
+
   const sanitizeData = (parsedData) => {
     const tracks = parsedData.getAllStreams();
     const timeTrack = parsedData.generateTimeStream().data;
@@ -37,15 +49,14 @@ export default function DataSanatizer() {
     const elevation = tracks[2].data;
 
     const trackPoints = {
-      lat: latTrack.filter((ele) => ele !== null),
-      lng: lngTrack.filter((ele) => ele !== null),
+      latLngs: combineLatLngs(latTrack, lngTrack),
       elevation: elevation.filter((ele) => ele !== null),
       time: timeTrack.filter((ele) => ele !== null),
     };
-    const distance = parsedData.getDistance();
-    const duration = parsedData.getDuration();
-    const ascent = parsedData.getStat("Ascent");
-    const descent = parsedData.getStat("Descent");
+    const distance = parsedData.getDistance().value;
+    const duration = parsedData.getDuration().value;
+    const ascent = parsedData.getStat("Ascent").value;
+    const descent = parsedData.getStat("Descent").value;
     return {
       trackPoints,
       distance,
@@ -55,5 +66,5 @@ export default function DataSanatizer() {
     };
   };
 
-  return <DropzoneComponent readAndUpdateFile={readAndUpdateFile} />;
+  return <DropZoneComponent readAndUpdateFile={readAndUpdateFile} />;
 }
