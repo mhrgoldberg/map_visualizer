@@ -13,8 +13,7 @@ function Map({ onMount, className, onMountProps }) {
     zoom: 15,
   });
 
-  const addPolyline = async () => {
-		if(map){
+  const addPolyline = () => {
       const workoutPath = new window.google.maps.Polyline({
         path: state.file.trackPoints.latLngs,
         geodesic: true,
@@ -23,7 +22,6 @@ function Map({ onMount, className, onMountProps }) {
         strokeWeight: 2,
       });
 			workoutPath.setMap(map);
-		}
   };
 
   useEffect(() => {
@@ -41,7 +39,8 @@ function Map({ onMount, className, onMountProps }) {
 	}, [options]);
 	
 	useEffect(() => {
-		addPolyline();
+		if (map) addPolyline();
+
 	}, [map])
 
   if (map && typeof onMount === `function`) onMount(map, onMountProps);
