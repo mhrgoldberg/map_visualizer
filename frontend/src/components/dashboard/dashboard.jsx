@@ -1,14 +1,5 @@
 import React from "react";
-
-export default function Dashboard({file}) {
-  const parseData = (file) => {
-    debugger;
-
-  }
-
-  return (
-    <React.Fragment>
-      {parseData(file)}
-    </React.Fragment>
-  );
+import { FileContext } from "../../file_context";
+export default function Dashboard() {
+  return <FileContext.Consumer>{({ file }) => {debugger;}}</FileContext.Consumer>;
 }

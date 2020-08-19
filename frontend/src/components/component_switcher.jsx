@@ -1,14 +1,14 @@
 import React from "react";
-import { FileConsumer } from "../file_context";
+import { FileContext } from "../file_context";
 import Dashboard from "./dashboard/dashboard";
-import DropzoneFileReader from "./data_upload/dropzone_file_reader";
+import DataSanatizer from "./data_upload/data_sanitizer";
 
 export default function ComponentSwitcher() {
   return (
-    <FileConsumer>
+    <FileContext.Consumer>
       {({ file }) => { 
-        return file ? <Dashboard file={file} /> : <DropzoneFileReader />;
+        return file ? <Dashboard /> : <DataSanatizer />;
       }}
-    </FileConsumer>
+    </FileContext.Consumer>
   );
 }

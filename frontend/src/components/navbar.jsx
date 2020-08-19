@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { FileConsumer } from "../file_context";
+import { FileContext } from "../file_context";
 
 export default function NavBar() {
   const noDataButtons = (
@@ -19,7 +19,7 @@ export default function NavBar() {
   );
 
   return (
-    <FileConsumer>
+    <FileContext.Consumer>
       {({ file, updateFile }) => (
         <Navbar bg="primary" variant="dark">
           <span className="navbar-span">
@@ -28,6 +28,6 @@ export default function NavBar() {
           </span>
         </Navbar>
       )}
-    </FileConsumer>
+    </FileContext.Consumer>
   );
 }

@@ -1,27 +1,23 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from "react";
 
-const FileContext = createContext({
+export const FileContext = createContext({
   file: null,
-  updateFile: () => {}
+  updateFile: () => {},
 });
 
-export class FileProvider extends React.Component {
-  updateFile = newFile => {
-    this.setState({ file: newFile });
+export function FileProvider(props) {
+  const updateFile = (newFile) => {
+    setfileState({ file: newFile });
   };
-
-  state = {
+  const [fileState, setfileState] = useState({
     file: null,
-    updateFile: this.updateFile,
-  };
+    updateFile: updateFile,
+  })
 
-  render() {
+
     return (
-      <FileContext.Provider value={this.state}>
-        {this.props.children}
+      <FileContext.Provider value={fileState}>
+        {props.children}
       </FileContext.Provider>
     );
-  }
 }
-
-export const FileConsumer = FileContext.Consumer;
