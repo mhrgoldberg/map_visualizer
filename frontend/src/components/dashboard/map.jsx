@@ -11,16 +11,23 @@ function Map({ onMount, className, onMountProps }) {
       lng: state.file.trackPoints.latLngs[0].lng,
     },
     zoom: 15,
-  });
+	});
+
+	console.log(state)
 
   const addPolyline = () => {
+			const latLngPath = state.file.trackPoints.latLngs
       const workoutPath = new window.google.maps.Polyline({
-        path: state.file.trackPoints.latLngs,
+        path: latLngPath,
         geodesic: true,
         strokeColor: "#FF0000",
         strokeOpacity: 1.0,
         strokeWeight: 2,
-      });
+			});
+			const bounds = new window.google.maps.LatLngBounds();
+      latLngPath.forEach((trackPoint) => bounds.extend(trackPoint));
+      map.setCenter(bounds.getCenter());
+      map.fitBounds(bounds);
 			workoutPath.setMap(map);
   };
 
@@ -40,20 +47,20 @@ function Map({ onMount, className, onMountProps }) {
 	
 	useEffect(() => {
 		if (map) addPolyline();
-
 	}, [map])
 
   if (map && typeof onMount === `function`) onMount(map, onMountProps);
 
   return <div id="map-container" {...{ ref, className }} />;
 }
+
 function propsAndFunctionsAreEqual(props, nextProps) {
   const [funcs, nextFuncs] = [functions(props), functions(nextProps)];
-  debugger;
   const noPropChange = isEqual(omit(props, funcs), omit(nextProps, nextFuncs));
   const noFuncChange =
     funcs.length === nextFuncs.length &&
     funcs.every((fn) => props[fn].toString() === nextProps[fn].toString());
   return noPropChange && noFuncChange;
 }
+
 export default React.memo(Map, propsAndFunctionsAreEqual);
