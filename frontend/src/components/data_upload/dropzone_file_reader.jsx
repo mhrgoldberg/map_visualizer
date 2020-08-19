@@ -5,8 +5,7 @@ import Dropzone from "react-dropzone";
 // GPX data is read and converted to an object that contains array of cordinates
 // Data updates FileContext
 
-export default function DropzoneFileReader({ readAndUpdateFile }) {
-
+export default function DropzoneComponent({ readAndUpdateFile }) {
   return (
     <Dropzone
       onDrop={(newFileArray) => {
