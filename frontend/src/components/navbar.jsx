@@ -28,7 +28,7 @@ export default function NavBar() {
   return (
         <Navbar bg="primary" variant="dark">
           <span className="navbar-span">
-            <Navbar.Brand>Map Visualizer</Navbar.Brand>
+            <Navbar.Brand>Elevation Visualizer</Navbar.Brand>
             {state.file ? resetDataButton : noDataButtons}
           </span>
         </Navbar>
