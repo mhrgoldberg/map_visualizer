@@ -5,10 +5,13 @@ import { FileContext } from "../../file_context.js";
 import DropzoneComponent from "./dropzone";
 
 export default function DataSanatizer() {
+  
   const { dispatch } = useContext(FileContext);
-  const readAndUpdateFile = (fileObject) => {
+
+  const readAndUpdateFile = (fileObject) => { 
     const reader = new FileReader();
     reader.readAsText(fileObject);
+
     reader.onload = async () => {
       if (reader.result.includes("gpx")) {
         const parsedData = await parseData(reader.result);
@@ -18,8 +21,9 @@ export default function DataSanatizer() {
         alert("Sorry, we can only accept GPX files");
       }
     };
+
     reader.onerror = () => {
-      console.log(reader.error);
+      alert(reader.error);
     };
   };
 
