@@ -1,5 +1,11 @@
 import { functions, isEqual, omit } from "lodash";
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from "react";
 import { FileContext } from "../../file_context";
 function Map({ onMount, className, onMountProps }) {
   const ref = useRef();
@@ -11,24 +17,23 @@ function Map({ onMount, className, onMountProps }) {
       lng: state.file.trackPoints.latLngs[0].lng,
     },
     zoom: 15,
-	});
+  });
 
-
-  const addPolyline = () => {
-			const latLngPath = state.file.trackPoints.latLngs
-      const workoutPath = new window.google.maps.Polyline({
-        path: latLngPath,
-        // geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.5,
-        strokeWeight: 2,
-			});
-			const bounds = new window.google.maps.LatLngBounds();
-      latLngPath.forEach((trackPoint) => bounds.extend(trackPoint));
-      map.setCenter(bounds.getCenter());
-      map.fitBounds(bounds);
-			workoutPath.setMap(map);
-  };
+  const addPolyline = useCallback(() => {
+    const latLngPath = state.file.trackPoints.latLngs;
+    const workoutPath = new window.google.maps.Polyline({
+      path: latLngPath,
+      // geodesic: true,
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.5,
+      strokeWeight: 2,
+    });
+    const bounds = new window.google.maps.LatLngBounds();
+    latLngPath.forEach((trackPoint) => bounds.extend(trackPoint));
+    map.setCenter(bounds.getCenter());
+    map.fitBounds(bounds);
+    workoutPath.setMap(map);
+  }, [state.file.trackPoints.latLngs, map]);
 
   useEffect(() => {
     const onLoad = () =>
@@ -42,11 +47,11 @@ function Map({ onMount, className, onMountProps }) {
       script.addEventListener(`load`, onLoad);
       return () => script.removeEventListener(`load`, onLoad);
     } else onLoad();
-	}, [options]);
-	
-	useEffect(() => {
-		if (map) addPolyline();
-	}, [map])
+  }, [options]);
+
+  useEffect(() => {
+    if (map) addPolyline();
+  }, [map, addPolyline]);
 
   if (map && typeof onMount === `function`) onMount(map, onMountProps);
 
