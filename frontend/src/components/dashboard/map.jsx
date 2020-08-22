@@ -5,7 +5,7 @@ function Map({ onMount, className, onMountProps }) {
   const ref = useRef();
   const [map, setMap] = useState();
   const { state } = useContext(FileContext);
-  const [options, setOptions] = useState({
+  const [options] = useState({
     center: {
       lat: state.file.trackPoints.latLngs[0].lat,
       lng: state.file.trackPoints.latLngs[0].lng,
@@ -18,7 +18,7 @@ function Map({ onMount, className, onMountProps }) {
 			const latLngPath = state.file.trackPoints.latLngs
       const workoutPath = new window.google.maps.Polyline({
         path: latLngPath,
-        geodesic: true,
+        // geodesic: true,
         strokeColor: "#FF0000",
         strokeOpacity: 1.5,
         strokeWeight: 2,

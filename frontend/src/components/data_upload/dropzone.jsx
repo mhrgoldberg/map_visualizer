@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Dropzone from "react-dropzone";
 
 // Component allows users to drag and drop GPX file to upload

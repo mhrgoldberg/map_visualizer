@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import DropZoneComponent from "./dropzone";
 import { SportsLib } from "@sports-alliance/sports-lib";
 import { FileContext } from "../../file_context.js";
-import DropzoneComponent from "./dropzone";
 
 export default function DataSanatizer() {
   
