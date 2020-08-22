@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useContext } from "react";
+import { useEffect, useCallback, useContext } from "react";
 import { FileContext } from "../file_context";
 
 export default function usePolyline(map) {

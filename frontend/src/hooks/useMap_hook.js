@@ -1,15 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-} from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 import { FileContext } from "../file_context";
 
-
 export default function useMap() {
-	const ref = useRef();
+  const ref = useRef();
   const [map, setMap] = useState();
   const { state } = useContext(FileContext);
   const [options] = useState({
@@ -19,9 +13,6 @@ export default function useMap() {
     },
     zoom: 15,
   });
-
-
-
 
   useEffect(() => {
     const onLoad = () =>
@@ -37,7 +28,5 @@ export default function useMap() {
     } else onLoad();
   }, [options]);
 
- 
-	
-	return [ref, map]
+  return [ref, map];
 }
