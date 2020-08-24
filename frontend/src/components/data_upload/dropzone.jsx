@@ -14,6 +14,7 @@ export default function DropZoneComponent() {
   const { dispatch } = useContext(FileContext);
 
   useEffect(() => {
+    //  Whenever rawFile updates then parse/sanitize data then dispatch action
     if (rawFile !== null) {
       const reader = new FileReader();
       reader.readAsText(rawFile);

@@ -4,6 +4,7 @@ import Dashboard from "./dashboard/dashboard";
 import DropzoneComponent from "./data_upload/dropzone";
 
 export default function ComponentSwitcher() {
+  // Switches components based on if the state contains a file
   return (
     <FileContext.Consumer>
       {({ state }) => { 
