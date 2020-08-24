@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 
-import { FileContext } from "../file_context";
+import { FileContext } from "../../../../context/file_context";
 
 export default function useMap() {
   const ref = useRef();

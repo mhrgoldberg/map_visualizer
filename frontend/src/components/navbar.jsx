@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { FileContext } from "../file_context";
+import { FileContext } from "../context/file_context";
 
 export default function NavBar() {
   const {state, dispatch} = useContext(FileContext);

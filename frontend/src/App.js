@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./components/navbar";
 import ComponentSwitcher from "./components/component_switcher";
-import { FileProvider } from "./file_context";
+import { FileProvider } from "./context/file_context";
 import "./scss/App.scss";
 
 

@@ -1,15 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
+import gpsFileSanitizer from "./gps_file_sanitizer";
+import { useContext } from "react";
+import { FileContext } from "../../context/file_context";
+import { SportsLib } from "@sports-alliance/sports-lib";
 
 // Component allows users to drag and drop GPX file to upload
-// GPX data is read and converted to an object that contains array of cordinates
+// GPX data is read, sanitized, and updates File
 // Data updates FileContext
 
-export default function DropZoneComponent({ readAndUpdateFile }) {
+export default function DropZoneComponent() {
+  const [rawFile, setRawFile] = useState(null);
+  const { dispatch } = useContext(FileContext);
+
+  useEffect(() => {
+    if (rawFile !== null) {
+      const reader = new FileReader();
+      reader.readAsText(rawFile);
+      reader.onload = () => {
+        if (reader.result.includes("gpx")) {
+          SportsLib.importFromGPX(reader.result)
+            .then((parsedData) => {
+              return new Promise((resolve, reject) => {
+                const activities = parsedData.getActivities()[0];
+                if (activities) {
+                  resolve(gpsFileSanitizer(activities));
+                } else {
+                  reject(alert("file upload error"));
+                }
+              });
+            })
+            .then((sanitizedData) => {
+              dispatch({ type: "updateFile", payload: sanitizedData });
+            });
+        } else {
+          alert("Sorry, we can only accept GPX files");
+        }
+      };
+    }
+  }, [rawFile, dispatch]);
+
   return (
     <Dropzone
       onDrop={(newFileArray) => {
-        readAndUpdateFile(newFileArray[0]);
+        setRawFile(newFileArray[0]);
       }}
     >
       {({ getRootProps, getInputProps, isDragActive }) => (

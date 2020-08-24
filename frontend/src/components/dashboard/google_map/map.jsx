@@ -1,5 +1,5 @@
-import useMap from "../../hooks/useMap_hook";
-import usePolyline from "../../hooks/usePolyline_hook";
+import useMap from "./hooks/useMap_hook";
+import usePolyline from "./hooks/usePolyline_hook";
 import React from "react";
 
 export default function Map({ className }) {
