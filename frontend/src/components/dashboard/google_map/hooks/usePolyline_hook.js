@@ -2,7 +2,7 @@ import { useEffect, useCallback, useContext } from "react";
 import { FileContext } from "../../../../context/file_context";
 
 export default function usePolyline(map) {
-	const { state } = useContext(FileContext);
+  const { state } = useContext(FileContext);
   const addPolyline = useCallback(() => {
     const latLngPath = state.file.trackPoints.latLngs;
     const workoutPath = new window.google.maps.Polyline({

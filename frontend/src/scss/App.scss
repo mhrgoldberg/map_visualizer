@@ -17,6 +17,12 @@
   justify-content: space-between;
 }
 
+.dual-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: fit-content + 20px;
+}
+
 #upload-button {
   width: calc(100% - 2rem);
   height: calc(100% - 56px - 2rem);
@@ -40,8 +46,4 @@
   max-width: 800px;
 }
 
-
-
-
-
-@import "custom"
+@import "custom";
